@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1701700131 source:c:\users\student\desktop\dynamicznaalokacja\main.cpp
+	<iostream>
+	<stdlib.h>
+
