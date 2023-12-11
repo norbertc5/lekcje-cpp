@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1701700131 source:c:\users\student\desktop\dynamicznaalokacja\main.cpp
+	<iostream>
+	<stdlib.h>
+
+1702304895 source:c:\users\student\desktop\lekcje-cpp-main\dynamicznaalokacja\main.cpp
+	<iostream>
+	<stdlib.h>
+
