@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1710167367 source:c:\users\student\desktop\wyszukiwaniebinarne\main.cpp
+	<iostream>
+	<stdlib.h>
+	<time.h>
+
