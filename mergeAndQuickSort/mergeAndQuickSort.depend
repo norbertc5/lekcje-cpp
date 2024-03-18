@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1710772290 source:c:\users\student\desktop\mergeandquicksort\main.cpp
+	<iostream>
+	<stdlib.h>
+	<time.h>
+
