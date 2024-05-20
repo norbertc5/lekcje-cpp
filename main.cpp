@@ -1,108 +1,48 @@
 #include <iostream>
-#include <time.h>
-#include <stdlib.h>
 
 using namespace std;
 
-void Los(int tab[], int tabLen, int minVal, int maxVal)
+class Vehicle
 {
-    srand(time(NULL));
-
-    for(int i=0; i<10; i++)
+    public:
+    virtual void Print()
     {
-        tab[i] = minVal+rand()%(maxVal-minVal);
+        cout << "???" << endl;
     }
-}
+};
 
-int Min(int tab[], int start, int stop)
+class Car : public Vehicle
 {
-    int lowest = 1000;
-    int lowestPos = 0;
-
-    for(int i=start; i<=stop; i++)
+    public:
+    void Print()
     {
-        if(tab[i] < lowest)
-        {
-            lowest = tab[i];
-            lowestPos = i;
-        }
+        cout << "Car" << endl;
     }
-    return lowestPos;
-}
+};
 
-void Wypisz(int tab[], int tabLen)
+class Bike : public Vehicle
 {
-    for(int i=0; i<tabLen; i++)
+    public:
+    void Print()
     {
-        cout<<tab[i]<<endl;
+        cout << "Bike" << endl;
     }
-}
-
-int SortB(int tab[], int tabLen)
-{
-    int iterations=0;
-
-    for(int i=0; i<tabLen; i++)
-    {
-        for(int j=0; j<tabLen-1; j++)
-        {
-            if(tab[i]<tab[j])
-            {
-                int temp = tab[i];
-                tab[i] = tab[j];
-                tab[j] = temp;
-            }
-            iterations++;
-        }
-    }
-    return iterations;
-}
-
-int SortWyb(int tab[], int tabLen)
-{
-    int iterations = 0;
-    for(int i=0; i<tabLen; i++)
-    {
-        int minPos = Min(tab, i, tabLen);
-        int temp = tab[i];
-        tab[i] = tab[minPos];
-        tab[minPos] = temp;
-        iterations++;
-    }
-    return iterations;
-}
-
-int SortWys(int tab[], int tabLen)
-{
-
-    int iterations = 0;
-    for(int i=0; i<tabLen; i++)
-    {
-        for(int j=i+1; j<tabLen; i++)
-        {
-            if(tab[j] < tab[i])
-            {
-                int temp = tab[j];
-                tab[j] = tab[i];
-                tab[j] = temp;
-            }
-
-            iterations++;
-        }
-    }
-    return iterations;
-}
-
-
+};
 
 int main()
 {
-    int tab[] = {0, 0, 0, 0};
-    Los(tab, 4, 10, 15);
-    ///cout << "i: " << SortB(tab, 4) << endl;
-    cout << "i: " << SortWyb(tab, 4) << endl;
-    ///cout << "i: " << SortWys(tab, 4) << endl;
-    Wypisz(tab, 4);
-    cout << "Lowest " << Min(tab, 0, 4);
+    Vehicle* vehicles[] = {new Vehicle(), new Car(), new Bike()};
+
+    int n = sizeof(vehicles)/sizeof(Vehicle*);
+    for(int i=0; i<n; i++)
+    {
+        vehicles[i]->Print();
+    }
+
+    for(int i=0; i<n; i++)
+    {
+        delete vehicles[i];
+    }
+
     return 0;
 }
