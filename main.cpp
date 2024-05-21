@@ -1,48 +1,121 @@
 #include <iostream>
+#include <stdlib.h>
 
 using namespace std;
 
-class Vehicle
+class Employee
 {
-    public:
-    virtual void Print()
+private:
+    string name="", sname="";
+    int exp=0;
+
+public:
+    Employee()
     {
-        cout << "???" << endl;
+
+    }
+    Employee(string n, string sn)
+    {
+        name = n;
+        sname = sn;
+    }
+
+    virtual void Wizytowka()
+    {
+        cout << name << " " << sname << endl;
+    }
+
+    friend class Programmer;
+    friend class Manager;
+};
+
+class Programmer : public Employee
+{
+
+public:
+
+    Programmer(string n, string sn): Employee(n, sn)
+    {
+
+    }
+    void Wizytowka()
+    {
+        cout << name << " " << sname << " programista" << endl;
     }
 };
 
-class Car : public Vehicle
+class Manager : public Employee
 {
     public:
-    void Print()
+    Manager(string n, string sn) : Employee(n, sn)
     {
-        cout << "Car" << endl;
+
+    }
+    void Wizytowka()
+    {
+        cout << name << " " << sname << " manager" << endl;
     }
 };
 
-class Bike : public Vehicle
+void AddEmployee()
 {
-    public:
-    void Print()
-    {
-        cout << "Bike" << endl;
-    }
-};
+
+}
 
 int main()
 {
-    Vehicle* vehicles[] = {new Vehicle(), new Car(), new Bike()};
+    Employee* employees[100] = {};
 
-    int n = sizeof(vehicles)/sizeof(Vehicle*);
-    for(int i=0; i<n; i++)
+    int inp = 0;
+    int employeesAmount = 0;
+
+    while(true)
     {
-        vehicles[i]->Print();
+        cout << "1-Dodaj pracownika\n2-wyswietl pracownikow \n";
+        cin >> inp;
+        system("CLS");
+
+        switch(inp)
+        {
+            case 1:
+                {
+
+                    string n = "", sn = "", job = "";
+
+                    cout << "Dodaj pracownika.\n\nPodaj imie: " << endl;
+                    cin >> n;
+                    cout << "\nPodaj nazwisko: " << endl;
+                    cin >> sn;
+
+                    cout << "\nPodaj prace: " << endl;
+                    cin >> job;
+
+                    if(job == "programista")
+                    {
+                        employees[employeesAmount] = new Programmer(n, sn);
+                    }
+                    else if(job == "manager")
+                    {
+                        employees[employeesAmount] = new Manager(n, sn);
+                    }
+                    else
+                    {
+                        employees[employeesAmount] = new Employee(n, sn);
+                    }
+                    employeesAmount++;
+                    break;
+                }
+
+            case 2:
+                for(int i=0; i<employeesAmount; i++)
+                {
+                    employees[i]->Wizytowka();
+                }
+                break;
+        }
     }
 
-    for(int i=0; i<n; i++)
-    {
-        delete vehicles[i];
-    }
+
 
     return 0;
 }
