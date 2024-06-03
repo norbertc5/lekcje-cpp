@@ -1,121 +1,90 @@
 #include <iostream>
-#include <stdlib.h>
 
 using namespace std;
 
-class Employee
+string czyAnagram(string s1, string s2)
 {
-private:
-    string name="", sname="";
-    int exp=0;
+    int l = s1.length();
 
-public:
-    Employee()
-    {
+    if(l != s2.length())
+        return "nie anagram";
 
-    }
-    Employee(string n, string sn)
+    for(int i=0; i<l; i++)
     {
-        name = n;
-        sname = sn;
-    }
-
-    virtual void Wizytowka()
-    {
-        cout << name << " " << sname << endl;
+        for(int j=0; j<l; j++)
+        {
+            if(s1[i] == s2[j] && s2[j] != '%')
+            {
+                //cout << s1 << endl;
+                s1[i] = '%';
+                s2[j] = '%';
+            }
+        }
     }
 
-    friend class Programmer;
-    friend class Manager;
-};
+    for(int i=0; i<l; i++)
+    {
+        if(s1[i] != '%' && s2[i] != '%')
+        {
+            return "nie anagram";
+        }
+    }
 
-class Programmer : public Employee
+    return "anagram";
+
+}
+
+int* dodajTablice(int t1[], int t2[], int n)
 {
-
-public:
-
-    Programmer(string n, string sn): Employee(n, sn)
+    int* p = new int[n];
+    for(int i=0; i<n; i++)
     {
-
+        p[i] = t1[i] + t2[i];
     }
-    void Wizytowka()
-    {
-        cout << name << " " << sname << " programista" << endl;
-    }
-};
 
-class Manager : public Employee
+    return p;
+}
+
+void permutacje(/*int a, int b*/)
 {
-    public:
-    Manager(string n, string sn) : Employee(n, sn)
+    int tab[] = {1,2,3};
+    int n = 3;
+
+    for(int i=0; i<n*2; i++)
     {
+        int permutacja[] = {1,2,3};
+        for(int j=0; j<(n*2)-1; j++)
+        {
+            int temp = permutacja[i];
+            permutacja[i] = permutacja[j];
+            permutacja[j] = temp;
 
+            for(int k=0; k<n; k++)
+            {
+                cout << permutacja[k];
+            }
+            cout << endl;
+        }
     }
-    void Wizytowka()
-    {
-        cout << name << " " << sname << " manager" << endl;
-    }
-};
-
-void AddEmployee()
-{
-
 }
 
 int main()
 {
-    Employee* employees[100] = {};
+    //cout << czyAnagram("abb", "baa");
 
-    int inp = 0;
-    int employeesAmount = 0;
+    /*int tab1[] = {1,2,3};
+    int tab2[] = {1,2,3};
 
-    while(true)
+    int* w = dodajTablice(tab1, tab2, 3);
+
+    for(int i =0; i<3; i++)
     {
-        cout << "1-Dodaj pracownika\n2-wyswietl pracownikow \n";
-        cin >> inp;
-        system("CLS");
-
-        switch(inp)
-        {
-            case 1:
-                {
-
-                    string n = "", sn = "", job = "";
-
-                    cout << "Dodaj pracownika.\n\nPodaj imie: " << endl;
-                    cin >> n;
-                    cout << "\nPodaj nazwisko: " << endl;
-                    cin >> sn;
-
-                    cout << "\nPodaj prace: " << endl;
-                    cin >> job;
-
-                    if(job == "programista")
-                    {
-                        employees[employeesAmount] = new Programmer(n, sn);
-                    }
-                    else if(job == "manager")
-                    {
-                        employees[employeesAmount] = new Manager(n, sn);
-                    }
-                    else
-                    {
-                        employees[employeesAmount] = new Employee(n, sn);
-                    }
-                    employeesAmount++;
-                    break;
-                }
-
-            case 2:
-                for(int i=0; i<employeesAmount; i++)
-                {
-                    employees[i]->Wizytowka();
-                }
-                break;
-        }
+        cout << w[i] << endl;
     }
 
+    delete[] w;*/
 
+    permutacje();
 
     return 0;
 }
